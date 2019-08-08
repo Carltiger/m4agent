@@ -87,8 +87,9 @@ def job_agent():
         print('@{} abvalable mechines nums:{}'.format(time.strftime('%Y%m%d %H:%M:%S'),len(data)))
         print(data)
         print('##'*40)
-        r1 = redis.StrictRedis(host=YOUHOSTIP, port=6379, password='', db=1)
+        r1 = redis.StrictRedis(host=YOUHOSTIP, port=6379, password='', db=0)
         pipe = r1.pipeline(transaction=False)
+        
         batch = int(len(codesz)/len(data))+1
         for n in range(len(data)-1):
             pipe.rpush("job1",str((batch*n,batch*(n+1))))
@@ -97,8 +98,6 @@ def job_agent():
         
         #配置job2 ,codesz为job2配置执行总范围，大致平均分配每台终端
         codesz = []
-        r2 = redis.StrictRedis(host=YOUHOSTIP, port=6379, password='', db=2)
-        pipe = r2.pipeline(transaction=False)
         batch = int(len(codesz)/len(data))+1
         for n in range(len(data)-1):
             pipe.rpush("job2",str((batch*n,batch*(n+1))))
@@ -107,8 +106,6 @@ def job_agent():
         
         #配置job3 ,codesz为job3配置执行总范围，大致平均分配每台终端 。。。。
         codesz = []
-        r2 = redis.StrictRedis(host=YOUHOSTIP, port=6379, password='', db=3)
-        pipe = r2.pipeline(transaction=False)
         batch = int(len(codesz)/len(data))+1
         for n in range(len(data)-1):
             pipe.rpush("job3",str((batch*n,batch*(n+1))))
