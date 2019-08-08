@@ -5,7 +5,7 @@ config you host IP
     #YOUHOSTIP = 'YOUR HOST IP address' 
 config every terminal as EP1,EP2,EP3...etc
     #endpoint = "EP1"
-## m4server_win.py 
+## m4server.py 
 monitor falcon your terminals and arrange tasks config or ...etc...
 ## m4post_job.py 
 post your jobs to redisdb
